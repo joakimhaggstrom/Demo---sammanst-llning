@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kundöversikt</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app">
+        <header>
+            <h1>Kundöversikt</h1>
+            <p>Sök på kundnummer för tjänster, tickets, enheter och Microsoft-licenser.</p>
+        </header>
+
+        <section class="search-panel">
+            <div class="field">
+                <label for="customerId">Kundnummer</label>
+                <input type="text" id="customerId" placeholder="t.ex. K-10042" autocomplete="off">
+            </div>
+            <div class="field">
+                <label for="dateFrom">Period från</label>
+                <input type="date" id="dateFrom">
+            </div>
+            <div class="field">
+                <label for="dateTo">Period till</label>
+                <input type="date" id="dateTo">
+            </div>
+            <button type="button" class="btn-primary" id="searchBtn">Sök</button>
+        </section>
+        <p class="hint">Demo-kunder: <code>K-10042</code> · <code>K-20018</code> · <code>K-30055</code></p>
+
+        <div id="message" class="empty-state" hidden></div>
+
+        <section id="dashboard" class="dashboard" hidden>
+            <div class="customer-header">
+                <h2 id="customerName"></h2>
+                <span class="customer-meta" id="customerMeta"></span>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="value" id="statServices">0</div>
+                    <div class="label">Tjänster hos oss</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value" id="statTickets">0</div>
+                    <div class="label">Tickets i perioden</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value" id="statDevices">0</div>
+                    <div class="label">Enheter</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value" id="statLicenses">0</div>
+                    <div class="label">Licenser</div>
+                </div>
+            </div>
+            <p class="hint" style="margin-bottom: 1.25rem;">Ticket-period: <span id="periodLabel"></span></p>
+
+            <nav class="tabs">
+                <button type="button" class="tab active" data-tab="overview">Översikt & tickets</button>
+                <button type="button" class="tab" data-tab="devices">Enheter</button>
+                <button type="button" class="tab" data-tab="licenses">Licenser</button>
+            </nav>
+
+            <div id="panel-overview" class="panel active">
+                <div class="card" style="margin-bottom: 1rem;">
+                    <h3>Tjänster</h3>
+                    <ul class="service-list" id="servicesList"></ul>
+                </div>
+                <div class="card">
+                    <h3>Tickets i vald period</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Datum</th>
+                                    <th>Ärende</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ticketsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="panel-devices" class="panel">
+                <div class="card">
+                    <h3>Enhetsinformation</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Enhet</th>
+                                    <th>Typ</th>
+                                    <th>Modell</th>
+                                    <th>Användare</th>
+                                    <th>OS</th>
+                                    <th>Status</th>
+                                    <th>Senast sedd</th>
+                                </tr>
+                            </thead>
+                            <tbody id="devicesBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="panel-licenses" class="panel">
+                <div class="card">
+                    <h3>Microsoft-licenser</h3>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produkt</th>
+                                    <th>Antal</th>
+                                    <th>Tilldelade</th>
+                                    <th>Utgår</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="licensesBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="customers-data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
